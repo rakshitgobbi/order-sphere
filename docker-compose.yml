@@ -38,9 +38,23 @@ services:
     container_name: eurekaserver-ms
     ports:
       - "8761:8761"
+    healthcheck:
+      test: "curl --fail --silent localhost:8761/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
     extends:
       file: common-config.yml
-      service: network-deploy-service
+      service: microservice-base-config
+
+  gateway-server:
+    image: ${DOCKER_USERNAME}/gateway-server:${IMAGE_TAG}
+    container_name: gatewayserver-ms
+    ports:
+      - "8080:8080"
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
 
 networks:
   order-sphere-network:

@@ -13,9 +13,15 @@ services:
     environment:
       SPRING_RABBITMQ_HOST: "rabbit"
 
-  microservice-configserver-config:
+  microservice-eureka-config:
     extends:
       service: microservice-base-config
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka/"
+
+  microservice-configserver-config:
+    extends:
+      service: microservice-eureka-config
     environment:
 #      SPRING_PROFILES_ACTIVE: "qa"
       SPRING_CONFIG_IMPORT: "configserver:http://config-server:8888/"
