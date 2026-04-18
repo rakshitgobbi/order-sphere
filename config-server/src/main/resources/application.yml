@@ -17,15 +17,6 @@ spring:
           force-pull: true
           username: rakshit-gobbi
           password: ${MY_GITHUB_TOKEN}
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      default-zone:
-        http://eureka-server:8761/eureka/
 
 management:
   endpoints:
